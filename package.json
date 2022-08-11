@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "clear": "watchman watch-del-all",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
+    "ios:device": "react-native run-ios --device",
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
@@ -12,7 +14,9 @@
   },
   "dependencies": {
     "react": "18.0.0",
-    "react-native": "0.69.4"
+    "react-native": "0.69.4",
+    "react-native-reanimated": "^2.9.1",
+    "react-native-vision-camera": "^2.14.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
