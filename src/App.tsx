@@ -14,7 +14,11 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Root">
-        <Stack.Screen name="Root" component={RootScreen} />
+        <Stack.Screen
+          name="Root"
+          options={{ headerShown: false }}
+          component={RootScreen}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
