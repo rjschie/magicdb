@@ -22,6 +22,7 @@ const RootScreen = ({}: NativeStackScreenProps<NavStackParams, 'Root'>) => {
   return (
     <Tab.Navigator
       screenOptions={{
+        headerShown: false,
         tabBarHideOnKeyboard: true,
         tabBarStyle: {
           height: 88,
@@ -40,7 +41,6 @@ const RootScreen = ({}: NativeStackScreenProps<NavStackParams, 'Root'>) => {
         name="Home"
         component={HomeScreen}
         options={{
-          headerShown: false,
           tabBarIcon: ({ color, focused }) => {
             return focused ? (
               <HomeIcon
