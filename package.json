@@ -13,6 +13,9 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "format": "prettier --write ."
   },
+  "resolutions": {
+    "react-native-reanimated": "^2.9.1"
+  },
   "dependencies": {
     "@react-navigation/bottom-tabs": "^6.3.2",
     "@react-navigation/native-stack": "^6.7.0",
