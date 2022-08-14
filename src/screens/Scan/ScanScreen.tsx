@@ -1,6 +1,6 @@
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { useIsFocused } from '@react-navigation/native';
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import {
   HandlerStateChangeEvent,
@@ -10,13 +10,12 @@ import {
 import {
   Camera,
   CameraRuntimeError,
-  FrameProcessorPerformanceSuggestion,
   useCameraDevices,
   useFrameProcessor,
 } from 'react-native-vision-camera';
 import { TabNavParams } from '../RootScreen';
 import Reanimated from 'react-native-reanimated';
-import { visionText } from '../../frame-processors/visionText';
+import { visionCards } from '../../frame-processors/visionCards';
 
 const ReanimatedCamera = Reanimated.createAnimatedComponent(Camera);
 Reanimated.addWhitelistedNativeProps({
@@ -25,11 +24,19 @@ Reanimated.addWhitelistedNativeProps({
 
 const ScanScreen = ({}: BottomTabScreenProps<TabNavParams>) => {
   const camera = useRef<Camera>(null);
+  const parentView = useRef<Reanimated.View>(null);
   const devices = useCameraDevices();
   const device = devices.back;
   const isFocused = useIsFocused();
   const isActive = isFocused;
-  // const zoom = useSharedValue(device?.neutralZoom ?? 0);
+  const [, setParentViewBoundingBox] = useState({
+    x: 0,
+    y: 0,
+    width: 0,
+    height: 0,
+    pageX: 0,
+    pageY: 0,
+  });
 
   const onError = useCallback(
     (err: CameraRuntimeError) => console.error(err),
@@ -38,18 +45,10 @@ const ScanScreen = ({}: BottomTabScreenProps<TabNavParams>) => {
 
   const frameProcessor = useFrameProcessor((frame) => {
     'worklet';
-    const values = visionText(frame);
-    console.log(`Return values: ${JSON.stringify(values)}`);
-  }, []);
+    const cardResults = visionCards(frame);
 
-  const onFrameProcessorSuggestion = useCallback(
-    (suggestion: FrameProcessorPerformanceSuggestion) => {
-      console.log(
-        `Suggestion available! ${suggestion.type}: Can do ${suggestion.suggestedFrameProcessorFps} fps`
-      );
-    },
-    []
-  );
+    console.log(cardResults);
+  }, []);
 
   const onSingleTap = useCallback(
     async (event: HandlerStateChangeEvent<TapGestureHandlerEventPayload>) => {
@@ -69,7 +68,15 @@ const ScanScreen = ({}: BottomTabScreenProps<TabNavParams>) => {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       {device != null && (
-        <Reanimated.View style={StyleSheet.absoluteFill}>
+        <Reanimated.View
+          ref={parentView}
+          style={StyleSheet.absoluteFill}
+          onLayout={() => {
+            parentView.current?.measure((x, y, width, height, pageX, pageY) => {
+              setParentViewBoundingBox({ x, y, width, height, pageX, pageY });
+            });
+          }}
+        >
           <TapGestureHandler
             onHandlerStateChange={onSingleTap}
             numberOfTaps={1}
@@ -86,11 +93,9 @@ const ScanScreen = ({}: BottomTabScreenProps<TabNavParams>) => {
                   : undefined
               }
               frameProcessorFps={1}
-              onFrameProcessorPerformanceSuggestionAvailable={
-                onFrameProcessorSuggestion
-              }
               orientation="portrait"
               style={StyleSheet.absoluteFill}
+              zoom={2}
             />
           </TapGestureHandler>
         </Reanimated.View>

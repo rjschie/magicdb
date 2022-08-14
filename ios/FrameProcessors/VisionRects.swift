@@ -2,8 +2,14 @@ import AVKit
 import Vision
 import os
 
-@objc(VisionText)
-public class VisionText: NSObject, FrameProcessorPluginBase {
+let logger = Logger()
+
+struct RectResult {
+  
+}
+
+@objc(VisionRects)
+public class VisionRects: NSObject, FrameProcessorPluginBase {
   @objc
   public static func callback(_ frame: Frame!, withArgs args: [Any]!) -> Any! {
     let imageBuffer = CMSampleBufferGetImageBuffer(frame.buffer)!
@@ -19,34 +25,35 @@ public class VisionText: NSObject, FrameProcessorPluginBase {
 
     let results = self.performVisionRequest(image: cgImage, orientation: .up)
 
-    var resArray: [[String:[String]]] = []
+    var rectArray: [[String: Any]] = []
     for res in results! {
-      let resi = res.topCandidates(1).map({ text in
-        return text.string
-      })
-      resArray.append(["candidates": resi])
+      rectArray.append([
+        "topLeft": ["x": res.topLeft.x, "y": res.topLeft.y],
+        "topRight": ["x": res.topRight.x, "y": res.topRight.y],
+        "bottomRight": ["x": res.bottomRight.x, "y": res.bottomRight.y],
+        "bottomLeft": ["x": res.bottomLeft.x, "y": res.bottomLeft.y],
+      ])
     }
 
     return [
-      "length": results!.count,
-      "results": resArray
+      "results": rectArray,
     ]
   }
 
-  private static func performVisionRequest(image: CGImage, orientation: CGImagePropertyOrientation) -> [VNRecognizedTextObservation]? {
-    var results: [VNRecognizedTextObservation]? = []
+  private static func performVisionRequest(image: CGImage, orientation: CGImagePropertyOrientation) -> [VNRectangleObservation]? {
+    var results: [VNRectangleObservation]? = []
     
-    func handleDetectedText(request: VNRequest?, error: Error?) {
+    func handleDetectedRectangles(request: VNRequest?, error: Error?) {
       if error as NSError? != nil {
-        logger.debug("Text detection error")
+        logger.debug("Rectangle detection error")
         return
       }
       
-      results = request?.results as? [VNRecognizedTextObservation]
+      results = request?.results as? [VNRectangleObservation]
       logger.debug("Added vision results, count: \(results!.count)")
     }
 
-    let requests: [VNRequest] = self.createVisionRequests(callback: handleDetectedText)
+    let requests: [VNRequest] = self.createVisionRequests(callback: handleDetectedRectangles)
     let imageRequestHandler: VNImageRequestHandler = VNImageRequestHandler(cgImage: image, orientation: orientation, options: [:])
 
     do {
@@ -59,12 +66,11 @@ public class VisionText: NSObject, FrameProcessorPluginBase {
   }
 
   private static func createVisionRequests(callback: @escaping (_ request: VNRequest?, _ error: Error?) -> Void) -> [VNRequest] {
-    let textDetectRequest: VNRecognizeTextRequest = VNRecognizeTextRequest(completionHandler: callback)
-    textDetectRequest.recognitionLevel = VNRequestTextRecognitionLevel.accurate
-    textDetectRequest.usesLanguageCorrection = true
-//    textDetectRequest.customWords = ["accursed", "gearsmith"]
+    let rectDetectRequest: VNDetectRectanglesRequest = VNDetectRectanglesRequest(completionHandler: callback)
+    rectDetectRequest.maximumObservations = 8
+    rectDetectRequest.minimumConfidence = 0.1
 
-    return [textDetectRequest]
+    return [rectDetectRequest]
   }
 
   private static func convertToUIImage(cmage: CIImage) -> UIImage {
