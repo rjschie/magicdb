@@ -4,19 +4,30 @@ import type { Frame } from 'react-native-vision-camera';
 
 declare let _WORKLET: true | undefined;
 
-interface Point {
-  x: number;
-  y: number;
+interface RectResults {
+  rects: Array<{
+    boundingBox: {
+      x: number;
+      y: number;
+      width: number;
+      height: number;
+    };
+    rectPoints: {
+      topLeft: { x: number; y: number };
+      topRight: { x: number; y: number };
+      bottomRight: { x: number; y: number };
+      bottomLeft: { x: number; y: number };
+    };
+  }>;
+  text: {
+    name: string;
+    number: string;
+    set: string;
+  };
+  newFrame: Frame;
 }
 
-export interface Rect {
-  topLeft: Point;
-  topRight: Point;
-  bottomLeft: Point;
-  bottomRight: Point;
-}
-
-export function visionRects(frame: Frame): { results: Rect[] } {
+export function visionRects(frame: Frame): RectResults {
   'worklet';
   if (!_WORKLET) {
     throw new Error('VisionRects must be called from a frame processor!');

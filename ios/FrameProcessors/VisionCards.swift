@@ -1,104 +1,141 @@
-import AVKit
 import Vision
 import os
 
+struct TextResults {
+  var name: String
+  var number: String
+  var set: String
+}
+
 @objc(VisionCards)
 public class VisionCards: NSObject, FrameProcessorPluginBase {
-  static var results: [VNRecognizedTextObservation]?
-  static var name: String = ""
-  static var number: String = ""
-  static var set: String = ""
+  static let logger = Logger()
+  static var rectObservations: [VNRectangleObservation] = []
+  static var results: [[String: Any]] = []
+  static var textResults: TextResults = TextResults.init(name: "", number: "", set: "")
+  static var newFrame: Frame = Frame.init()
 
-  static var textDetectRequest: VNRecognizeTextRequest = {
-    let textDetectRequest: VNRecognizeTextRequest = VNRecognizeTextRequest(completionHandler: handleTextDetect)
-    textDetectRequest.recognitionLevel = VNRequestTextRecognitionLevel.accurate
-    textDetectRequest.recognitionLanguages = ["en_GB"]
-    textDetectRequest.usesLanguageCorrection = true
-//    textDetectRequest.customWords = []
+  static var rectDetectRequest: VNDetectRectanglesRequest = {
+    let rectDetectRequest: VNDetectRectanglesRequest = VNDetectRectanglesRequest(completionHandler: handleRectDetect)
+    rectDetectRequest.maximumObservations = 2
+    rectDetectRequest.minimumConfidence = 0.8
+    rectDetectRequest.minimumAspectRatio = VNAspectRatio(1.3)
+    rectDetectRequest.maximumAspectRatio = VNAspectRatio(1.7)
+    rectDetectRequest.minimumSize = 0.35
+    rectDetectRequest.quadratureTolerance = 15
 
-    return textDetectRequest
+    return rectDetectRequest
   }()
-  
+
   @objc
   public static func callback(_ frame: Frame!, withArgs args: [Any]!) -> Any! {
-    let imageBuffer = CMSampleBufferGetImageBuffer(frame.buffer)!
-    let ciImage = CIImage(cvPixelBuffer: imageBuffer)
-    let uiImage = convertToUIImage(cmage: ciImage)
-    
+    let uiImage = Utilities.convertToCGImage(frameBuffer: frame.buffer)
     guard let cgImage = uiImage.cgImage else {
-      logger.debug("UIImage has no CGImage backing it")
-      return uiImage
+      return []
     }
 
+    logger.info("Performing VisionRect callback...")
+
     performVisionRequest(image: cgImage, orientation: .up)
+    if (rectObservations.count > 0) {
+      textResults = doPerspectiveCorrect(rectObservations.first!, from: cgImage)
+    }
 
     return [
-      "name": name,
-      "number": number,
-      "set": set,
+      "rects": results,
+      "text": [
+        "name": textResults.name,
+        "number": textResults.number,
+        "set": textResults.set,
+      ],
+      "newFrame": newFrame,
     ]
   }
-  
-  fileprivate static func handleTextDetect(request: VNRequest?, error: Error?) {
-    guard let results = request?.results, results.count > 0 else {
-      logger.debug("No text was found")
+
+  fileprivate static func handleRectDetect(request: VNRequest?, error: Error?) {
+    if error as NSError? != nil {
+      logger.error("Rectangle detection error")
       return
     }
 
-    var components = [CardComponent]()
-    
-    for result in results {
-      if let observation = result as? VNRecognizedTextObservation {
-        for text in observation.topCandidates(1) {
-          let component = CardComponent()
-          component.x = observation.boundingBox.origin.x
-          component.y = observation.boundingBox.origin.y
-          component.text = text.string
-          components.append(component)
+    DispatchQueue.main.async {
+      guard let rectResults: [VNRectangleObservation] = request?.results as? [VNRectangleObservation] else {
+        return
+      }
+
+      results = []
+      rectObservations = []
+      if (rectResults.count > 0) {
+        logger.info("Found observations: \(rectResults.count)")
+
+        rectObservations = rectResults
+        for box in rectResults {
+          results.append([
+            "confidence": box.confidence,
+            "rect": [
+              "topLeft": ["x": box.topLeft.x, "y": box.topLeft.y],
+              "topRight": ["x": box.topRight.x, "y": box.topRight.y],
+              "bottomRight": ["x": box.bottomRight.x, "y": box.bottomRight.y],
+              "bottomLeft": ["x": box.bottomLeft.x, "y": box.bottomLeft.y],
+            ],
+            "boundingBox": [
+              "x": box.boundingBox.origin.x,
+              "y": box.boundingBox.origin.y,
+              "width": box.boundingBox.width,
+              "height": box.boundingBox.height,
+            ],
+          ])
         }
+      } else {
+        logger.info("No observations found")
       }
     }
-    
-    guard let firstComponent = components.first else { return }
-    
-    var nameComponent = firstComponent
-    var numberComponent = firstComponent
-    var setComponent = firstComponent
-    for component in components {
-      if component.x < nameComponent.x && component.y > nameComponent.y {
-        nameComponent = component
-      }
-      
-      if component.x < (numberComponent.x + 0.05) && component.y < numberComponent.y {
-        numberComponent = setComponent
-        setComponent = component
-      }
-    }
-    
-    name = nameComponent.text
-    if numberComponent.text.count >= 3 {
-      number = "\(numberComponent.text.prefix(3))"
-    }
-    if setComponent.text.count >= 3 {
-      set = "\(setComponent.text.prefix(3))"
-    }
+  }
+
+  fileprivate static func doPerspectiveCorrect(_ observation: VNRectangleObservation, from buffer: CGImage) -> TextResults {
+    var ciImage = CIImage(cgImage: buffer)
+
+    let topLeft = observation.topLeft.scaled(to: ciImage.extent.size)
+    let topRight = observation.topRight.scaled(to: ciImage.extent.size)
+    let bottomLeft = observation.bottomLeft.scaled(to: ciImage.extent.size)
+    let bottomRight = observation.bottomRight.scaled(to: ciImage.extent.size)
+
+    ciImage = ciImage.applyingFilter("CIPerspectiveCorrection", parameters: [
+      "inputTopLeft": CIVector(cgPoint: topLeft),
+      "inputTopRight": CIVector(cgPoint: topRight),
+      "inputBottomLeft": CIVector(cgPoint: bottomLeft),
+      "inputBottomRight": CIVector(cgPoint: bottomRight),
+    ])
+
+    let context = CIContext()
+    let cgImage = context.createCGImage(ciImage, from: ciImage.extent)
+    let output = UIImage(cgImage: cgImage!)
+
+    logger.info("Did perspective correction, setting TextExtractor...")
+    let textExtractor = TextExtractor()
+    textExtractor.scannedImage = output
+
+    let text = textExtractor.perform()
+    logger.info("Did TextExtractor, received name: \(text.name), number: \(text.number), set: \(text.set)")
+    return text
   }
 
   fileprivate static func performVisionRequest(image: CGImage, orientation: CGImagePropertyOrientation) {
-    let requests: [VNRequest] = [textDetectRequest]
+    let requests: [VNRequest] = [rectDetectRequest]
     let imageRequestHandler: VNImageRequestHandler = VNImageRequestHandler(cgImage: image, orientation: orientation, options: [:])
 
-    do {
-      try imageRequestHandler.perform(requests) //sync
-    } catch {
-      logger.debug("Could not perform Vision Request")
+    DispatchQueue.global(qos: .userInitiated).async {
+      do {
+        try imageRequestHandler.perform(requests) //sync
+      } catch {
+        logger.error("Could not perform Vision Request")
+      }
     }
   }
+}
 
-  fileprivate static func convertToUIImage(cmage: CIImage) -> UIImage {
-    let context = CIContext(options: nil)
-    let cgImage = context.createCGImage(cmage, from: cmage.extent)!
-    let image = UIImage(cgImage: cgImage)
-    return image
+extension CGPoint {
+  func scaled(to size: CGSize) -> CGPoint {
+    return CGPoint(x: self.x * size.width, y: self.y * size.height)
   }
 }
