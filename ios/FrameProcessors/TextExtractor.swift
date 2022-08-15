@@ -16,11 +16,12 @@ class TextExtractor: NSObject {
   var set: String = ""
 
   lazy var textDetectRequest: VNRecognizeTextRequest = {
-    let textDetectRequest: VNRecognizeTextRequest = VNRecognizeTextRequest(completionHandler: handleTextDetect)
+    let textDetectRequest: VNRecognizeTextRequest = VNRecognizeTextRequest(
+      completionHandler: handleTextDetect)
     textDetectRequest.recognitionLevel = VNRequestTextRecognitionLevel.accurate
     textDetectRequest.recognitionLanguages = ["en_GB"]
     textDetectRequest.usesLanguageCorrection = true
-//    textDetectRequest.customWords = []
+    //    textDetectRequest.customWords = []
 
     return textDetectRequest
   }()
@@ -29,7 +30,7 @@ class TextExtractor: NSObject {
     guard let cgImage = scannedImage?.cgImage else {
       return TextResults.init(name: "", number: "", set: "")
     }
-    
+
     logger.info("Performing TextExtractor...")
 
     performVisionRequest(image: cgImage, orientation: .up)
@@ -83,10 +84,11 @@ class TextExtractor: NSObject {
 
   fileprivate func performVisionRequest(image: CGImage, orientation: CGImagePropertyOrientation) {
     let requests: [VNRequest] = [textDetectRequest]
-    let imageRequestHandler: VNImageRequestHandler = VNImageRequestHandler(cgImage: image, orientation: orientation, options: [:])
+    let imageRequestHandler: VNImageRequestHandler = VNImageRequestHandler(
+      cgImage: image, orientation: orientation, options: [:])
 
     do {
-      try imageRequestHandler.perform(requests) //sync
+      try imageRequestHandler.perform(requests)  //sync
     } catch {
       //
     }

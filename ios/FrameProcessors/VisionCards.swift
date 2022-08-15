@@ -12,11 +12,11 @@ public class VisionCards: NSObject, FrameProcessorPluginBase {
   static let logger = Logger()
   static var rectObservations: [VNRectangleObservation] = []
   static var results: [[String: Any]] = []
-  static var textResults: TextResults = TextResults.init(name: "", number: "", set: "")
-  static var newFrame: Frame = Frame.init()
+  static var textResults: TextResults?
 
   static var rectDetectRequest: VNDetectRectanglesRequest = {
-    let rectDetectRequest: VNDetectRectanglesRequest = VNDetectRectanglesRequest(completionHandler: handleRectDetect)
+    let rectDetectRequest: VNDetectRectanglesRequest = VNDetectRectanglesRequest(
+      completionHandler: handleRectDetect)
     rectDetectRequest.maximumObservations = 2
     rectDetectRequest.minimumConfidence = 0.8
     rectDetectRequest.minimumAspectRatio = VNAspectRatio(1.3)
@@ -37,18 +37,19 @@ public class VisionCards: NSObject, FrameProcessorPluginBase {
     logger.info("Performing VisionRect callback...")
 
     performVisionRequest(image: cgImage, orientation: .up)
-    if (rectObservations.count > 0) {
+
+    textResults = nil
+    if rectObservations.count > 0 {
       textResults = doPerspectiveCorrect(rectObservations.first!, from: cgImage)
     }
 
     return [
       "rects": results,
       "text": [
-        "name": textResults.name,
-        "number": textResults.number,
-        "set": textResults.set,
+        "name": textResults?.name,
+        "number": textResults?.number,
+        "set": textResults?.set,
       ],
-      "newFrame": newFrame,
     ]
   }
 
@@ -59,13 +60,15 @@ public class VisionCards: NSObject, FrameProcessorPluginBase {
     }
 
     DispatchQueue.main.async {
-      guard let rectResults: [VNRectangleObservation] = request?.results as? [VNRectangleObservation] else {
+      guard
+        let rectResults: [VNRectangleObservation] = request?.results as? [VNRectangleObservation]
+      else {
         return
       }
 
       results = []
       rectObservations = []
-      if (rectResults.count > 0) {
+      if rectResults.count > 0 {
         logger.info("Found observations: \(rectResults.count)")
 
         rectObservations = rectResults
@@ -92,7 +95,9 @@ public class VisionCards: NSObject, FrameProcessorPluginBase {
     }
   }
 
-  fileprivate static func doPerspectiveCorrect(_ observation: VNRectangleObservation, from buffer: CGImage) -> TextResults {
+  fileprivate static func doPerspectiveCorrect(
+    _ observation: VNRectangleObservation, from buffer: CGImage
+  ) -> TextResults {
     var ciImage = CIImage(cgImage: buffer)
 
     let topLeft = observation.topLeft.scaled(to: ciImage.extent.size)
@@ -100,12 +105,14 @@ public class VisionCards: NSObject, FrameProcessorPluginBase {
     let bottomLeft = observation.bottomLeft.scaled(to: ciImage.extent.size)
     let bottomRight = observation.bottomRight.scaled(to: ciImage.extent.size)
 
-    ciImage = ciImage.applyingFilter("CIPerspectiveCorrection", parameters: [
-      "inputTopLeft": CIVector(cgPoint: topLeft),
-      "inputTopRight": CIVector(cgPoint: topRight),
-      "inputBottomLeft": CIVector(cgPoint: bottomLeft),
-      "inputBottomRight": CIVector(cgPoint: bottomRight),
-    ])
+    ciImage = ciImage.applyingFilter(
+      "CIPerspectiveCorrection",
+      parameters: [
+        "inputTopLeft": CIVector(cgPoint: topLeft),
+        "inputTopRight": CIVector(cgPoint: topRight),
+        "inputBottomLeft": CIVector(cgPoint: bottomLeft),
+        "inputBottomRight": CIVector(cgPoint: bottomRight),
+      ])
 
     let context = CIContext()
     let cgImage = context.createCGImage(ciImage, from: ciImage.extent)
@@ -116,17 +123,21 @@ public class VisionCards: NSObject, FrameProcessorPluginBase {
     textExtractor.scannedImage = output
 
     let text = textExtractor.perform()
-    logger.info("Did TextExtractor, received name: \(text.name), number: \(text.number), set: \(text.set)")
+    logger.info(
+      "Did TextExtractor, received name: \(text.name), number: \(text.number), set: \(text.set)")
     return text
   }
 
-  fileprivate static func performVisionRequest(image: CGImage, orientation: CGImagePropertyOrientation) {
+  fileprivate static func performVisionRequest(
+    image: CGImage, orientation: CGImagePropertyOrientation
+  ) {
     let requests: [VNRequest] = [rectDetectRequest]
-    let imageRequestHandler: VNImageRequestHandler = VNImageRequestHandler(cgImage: image, orientation: orientation, options: [:])
+    let imageRequestHandler: VNImageRequestHandler = VNImageRequestHandler(
+      cgImage: image, orientation: orientation, options: [:])
 
     DispatchQueue.global(qos: .userInitiated).async {
       do {
-        try imageRequestHandler.perform(requests) //sync
+        try imageRequestHandler.perform(requests)  //sync
       } catch {
         logger.error("Could not perform Vision Request")
       }
