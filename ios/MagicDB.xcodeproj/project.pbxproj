@@ -8,18 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* MagicDBTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* MagicDBTests.m */; };
-		0466EEBC3FE8C03719893C11 /* libPods-MagicDB-MagicDBTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C89610C0012C262A34A2B9AC /* libPods-MagicDB-MagicDBTests.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		22C3CDD74E296DB80424060D /* libPods-MagicDB-MagicDBTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AFF884248B6F3FB1BF1894CE /* libPods-MagicDB-MagicDBTests.a */; };
 		342C8AC028A9AC2700C21133 /* CardComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342C8ABF28A9AC2700C21133 /* CardComponent.swift */; };
 		342C8AC628AADCF200C21133 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342C8AC528AADCF200C21133 /* Utilities.swift */; };
 		342C8AC828AAEC8000C21133 /* TextExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342C8AC728AAEC8000C21133 /* TextExtractor.swift */; };
 		343F0AA028A8098100B9B976 /* VisionCards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 343F0A9F28A8098100B9B976 /* VisionCards.swift */; };
 		343F0AA228A8099600B9B976 /* VisionCards.m in Sources */ = {isa = PBXBuildFile; fileRef = 343F0AA128A8099600B9B976 /* VisionCards.m */; };
 		3499FF2628A6F79F00C8A46D /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3499FF2528A6F79F00C8A46D /* File.swift */; };
-		58A2AFEAE2992943E249DC76 /* libPods-MagicDB.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 81DC0FF15979CD10DAC6E3D0 /* libPods-MagicDB.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		E087164C9B8D1A48A99B9F5F /* libPods-MagicDB.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FFBB339E0C55B758CC8F82C /* libPods-MagicDB.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,14 +36,15 @@
 		00E356EE1AD99517003FC87E /* MagicDBTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MagicDBTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* MagicDBTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MagicDBTests.m; sourceTree = "<group>"; };
-		05722AA957D3CCF69A94A748 /* Pods-MagicDB.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MagicDB.release.xcconfig"; path = "Target Support Files/Pods-MagicDB/Pods-MagicDB.release.xcconfig"; sourceTree = "<group>"; };
+		050BF593DBD51D46B0C06EBB /* Pods-MagicDB-MagicDBTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MagicDB-MagicDBTests.release.xcconfig"; path = "Target Support Files/Pods-MagicDB-MagicDBTests/Pods-MagicDB-MagicDBTests.release.xcconfig"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* MagicDB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MagicDB.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = MagicDB/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = MagicDB/AppDelegate.mm; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = MagicDB/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = MagicDB/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = MagicDB/main.m; sourceTree = "<group>"; };
-		25AE80A65B2E57D2E25C37C5 /* Pods-MagicDB.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MagicDB.debug.xcconfig"; path = "Target Support Files/Pods-MagicDB/Pods-MagicDB.debug.xcconfig"; sourceTree = "<group>"; };
+		1FFBB339E0C55B758CC8F82C /* libPods-MagicDB.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MagicDB.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		30407B71A01AE54860C312A9 /* Pods-MagicDB-MagicDBTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MagicDB-MagicDBTests.debug.xcconfig"; path = "Target Support Files/Pods-MagicDB-MagicDBTests/Pods-MagicDB-MagicDBTests.debug.xcconfig"; sourceTree = "<group>"; };
 		342C8ABF28A9AC2700C21133 /* CardComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardComponent.swift; sourceTree = "<group>"; };
 		342C8AC528AADCF200C21133 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		342C8AC728AAEC8000C21133 /* TextExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextExtractor.swift; sourceTree = "<group>"; };
@@ -52,10 +53,9 @@
 		3499FF2428A6F79F00C8A46D /* MagicDB-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MagicDB-Bridging-Header.h"; sourceTree = "<group>"; };
 		3499FF2528A6F79F00C8A46D /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = MagicDB/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		81DC0FF15979CD10DAC6E3D0 /* libPods-MagicDB.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MagicDB.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8F73554A049E942181D8BAEE /* Pods-MagicDB-MagicDBTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MagicDB-MagicDBTests.debug.xcconfig"; path = "Target Support Files/Pods-MagicDB-MagicDBTests/Pods-MagicDB-MagicDBTests.debug.xcconfig"; sourceTree = "<group>"; };
-		C89610C0012C262A34A2B9AC /* libPods-MagicDB-MagicDBTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MagicDB-MagicDBTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		E1A569FD7EB91C76C4D4B9CC /* Pods-MagicDB-MagicDBTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MagicDB-MagicDBTests.release.xcconfig"; path = "Target Support Files/Pods-MagicDB-MagicDBTests/Pods-MagicDB-MagicDBTests.release.xcconfig"; sourceTree = "<group>"; };
+		AFF884248B6F3FB1BF1894CE /* libPods-MagicDB-MagicDBTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MagicDB-MagicDBTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BCF8E1DBE73592D66C8F78FB /* Pods-MagicDB.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MagicDB.debug.xcconfig"; path = "Target Support Files/Pods-MagicDB/Pods-MagicDB.debug.xcconfig"; sourceTree = "<group>"; };
+		D6E5B8BA6DB3E71A0CDE20E1 /* Pods-MagicDB.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MagicDB.release.xcconfig"; path = "Target Support Files/Pods-MagicDB/Pods-MagicDB.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -64,7 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0466EEBC3FE8C03719893C11 /* libPods-MagicDB-MagicDBTests.a in Frameworks */,
+				22C3CDD74E296DB80424060D /* libPods-MagicDB-MagicDBTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,7 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				58A2AFEAE2992943E249DC76 /* libPods-MagicDB.a in Frameworks */,
+				E087164C9B8D1A48A99B9F5F /* libPods-MagicDB.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -113,8 +113,8 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				81DC0FF15979CD10DAC6E3D0 /* libPods-MagicDB.a */,
-				C89610C0012C262A34A2B9AC /* libPods-MagicDB-MagicDBTests.a */,
+				1FFBB339E0C55B758CC8F82C /* libPods-MagicDB.a */,
+				AFF884248B6F3FB1BF1894CE /* libPods-MagicDB-MagicDBTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -168,10 +168,10 @@
 		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				25AE80A65B2E57D2E25C37C5 /* Pods-MagicDB.debug.xcconfig */,
-				05722AA957D3CCF69A94A748 /* Pods-MagicDB.release.xcconfig */,
-				8F73554A049E942181D8BAEE /* Pods-MagicDB-MagicDBTests.debug.xcconfig */,
-				E1A569FD7EB91C76C4D4B9CC /* Pods-MagicDB-MagicDBTests.release.xcconfig */,
+				BCF8E1DBE73592D66C8F78FB /* Pods-MagicDB.debug.xcconfig */,
+				D6E5B8BA6DB3E71A0CDE20E1 /* Pods-MagicDB.release.xcconfig */,
+				30407B71A01AE54860C312A9 /* Pods-MagicDB-MagicDBTests.debug.xcconfig */,
+				050BF593DBD51D46B0C06EBB /* Pods-MagicDB-MagicDBTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -183,12 +183,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "MagicDBTests" */;
 			buildPhases = (
-				75314EC3670688791D39B5F8 /* [CP] Check Pods Manifest.lock */,
+				A50BC60523CFD0AD11C7022C /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				C6203DCDC29F0EFD52716D71 /* [CP] Embed Pods Frameworks */,
-				582AA2F0D91BF65F652CB544 /* [CP] Copy Pods Resources */,
+				63DB43679743BA095DC85E66 /* [CP] Embed Pods Frameworks */,
+				4DA2169676082836ABDE51CB /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -204,14 +204,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "MagicDB" */;
 			buildPhases = (
-				BD6848FA0481382A32906602 /* [CP] Check Pods Manifest.lock */,
+				02900C2AEE75487C047796EC /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				E9C217DE85B6FEF1C2932453 /* [CP] Embed Pods Frameworks */,
-				84FADF741D7DC7C9B5C5BBF8 /* [CP] Copy Pods Resources */,
+				04DBF3301DC6EAF45A64521A /* [CP] Embed Pods Frameworks */,
+				9F63CC27282568E71A25355D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -294,63 +294,7 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nWITH_ENVIRONMENT=\"../node_modules/react-native/scripts/xcode/with-environment.sh\"\nREACT_NATIVE_XCODE=\"../node_modules/react-native/scripts/react-native-xcode.sh\"\n\n/bin/sh -c \"$WITH_ENVIRONMENT $REACT_NATIVE_XCODE\"\n";
 		};
-		582AA2F0D91BF65F652CB544 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MagicDB-MagicDBTests/Pods-MagicDB-MagicDBTests-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MagicDB-MagicDBTests/Pods-MagicDB-MagicDBTests-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MagicDB-MagicDBTests/Pods-MagicDB-MagicDBTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		75314EC3670688791D39B5F8 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-MagicDB-MagicDBTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		84FADF741D7DC7C9B5C5BBF8 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MagicDB/Pods-MagicDB-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MagicDB/Pods-MagicDB-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MagicDB/Pods-MagicDB-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		BD6848FA0481382A32906602 /* [CP] Check Pods Manifest.lock */ = {
+		02900C2AEE75487C047796EC /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -372,7 +316,41 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C6203DCDC29F0EFD52716D71 /* [CP] Embed Pods Frameworks */ = {
+		04DBF3301DC6EAF45A64521A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MagicDB/Pods-MagicDB-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MagicDB/Pods-MagicDB-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MagicDB/Pods-MagicDB-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4DA2169676082836ABDE51CB /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MagicDB-MagicDBTests/Pods-MagicDB-MagicDBTests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MagicDB-MagicDBTests/Pods-MagicDB-MagicDBTests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MagicDB-MagicDBTests/Pods-MagicDB-MagicDBTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		63DB43679743BA095DC85E66 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -389,21 +367,43 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MagicDB-MagicDBTests/Pods-MagicDB-MagicDBTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E9C217DE85B6FEF1C2932453 /* [CP] Embed Pods Frameworks */ = {
+		9F63CC27282568E71A25355D /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MagicDB/Pods-MagicDB-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-MagicDB/Pods-MagicDB-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Embed Pods Frameworks";
+			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MagicDB/Pods-MagicDB-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-MagicDB/Pods-MagicDB-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MagicDB/Pods-MagicDB-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MagicDB/Pods-MagicDB-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A50BC60523CFD0AD11C7022C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MagicDB-MagicDBTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {
@@ -464,7 +464,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8F73554A049E942181D8BAEE /* Pods-MagicDB-MagicDBTests.debug.xcconfig */;
+			baseConfigurationReference = 30407B71A01AE54860C312A9 /* Pods-MagicDB-MagicDBTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -493,7 +493,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E1A569FD7EB91C76C4D4B9CC /* Pods-MagicDB-MagicDBTests.release.xcconfig */;
+			baseConfigurationReference = 050BF593DBD51D46B0C06EBB /* Pods-MagicDB-MagicDBTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -519,7 +519,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 25AE80A65B2E57D2E25C37C5 /* Pods-MagicDB.debug.xcconfig */;
+			baseConfigurationReference = BCF8E1DBE73592D66C8F78FB /* Pods-MagicDB.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -551,7 +551,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 05722AA957D3CCF69A94A748 /* Pods-MagicDB.release.xcconfig */;
+			baseConfigurationReference = D6E5B8BA6DB3E71A0CDE20E1 /* Pods-MagicDB.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
