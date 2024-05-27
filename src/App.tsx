@@ -3,9 +3,11 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import RootScreen from './screens/RootScreen';
 import { Camera, CameraPermissionStatus } from 'react-native-vision-camera';
+import CardDataDownloader from './screens/CardDataDownloaderScreen';
 
 export type NavStackParams = {
   Root: undefined;
+  CardDataDownloader: undefined;
   Profile: undefined;
 };
 
@@ -25,9 +27,18 @@ const App = () => {
     return null; // still loading
   }
 
+  const hasNoDatabase = true;
+
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Root">
+      <Stack.Navigator
+        initialRouteName={hasNoDatabase ? 'CardDataDownloader' : 'Root'}
+      >
+        <Stack.Screen
+          name="CardDataDownloader"
+          options={{ headerShown: false }}
+          component={CardDataDownloader}
+        />
         <Stack.Screen
           name="Root"
           options={{ headerShown: false }}

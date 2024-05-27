@@ -1,7 +1,7 @@
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import React from 'react';
 import { Text, View } from 'react-native';
-import { TabNavParams } from '../RootScreen';
+import { TabNavParams } from './RootScreen';
 
 const HomeScreen = ({}: BottomTabScreenProps<TabNavParams>) => {
   return (
